@@ -41,6 +41,14 @@ accelerator:
     dataType: string
     defaultValue: "your-registry.io/project/repo"
 
+  - name: kubeContext
+    label: Kubectl Context to develop against
+    display: true
+    description: Kubernetes Context for use when running the Live Update feature
+    inputType: text
+    dataType: string
+    defaultValue: "eduk8s"
+
 engine:
   merge:
   - include: [ "**/*" ]
@@ -57,6 +65,8 @@ engine:
         with: "#ociCodeRepo"
       - text: tanzu-java-web-app
         with: "#artifactId"
+      - text: "eduk8s"
+        with: "#kubeContext"
   - include: [ "README.md" ]
     chain:
     - type: ReplaceText
