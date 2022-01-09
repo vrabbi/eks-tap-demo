@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: java-web-app
+  description: Demo Java Web App
+  tags:
+    - app-accelerator
+    - java
+    - spring
+    - web
+    - tanzu
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'carto.run/workload-name=java-web-app'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: team-a

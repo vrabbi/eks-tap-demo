@@ -1,0 +1,73 @@
+accelerator:
+  displayName: Java Web App
+  description: A sample Spring Boot web application built with Tanzu supply-chain
+  iconUrl: https://github.com/sample-accelerators/icons/raw/master/icon-boot.png
+  tags:
+  - java
+  - spring
+  - web
+  - tanzu
+
+  options:
+  - name: title
+    label: Title
+    display: true
+    description: Title text for the application
+    inputType: text
+    dataType: string
+    defaultValue: "Tanzu Sensor Database"
+
+  - name: gitUrl
+    label: Git Repository URL
+    display: true
+    description: Git Repository URL of the application's source code
+    inputType: text
+    dataType: string
+    defaultValue: "https://github.com/sample-accelerators/tanzu-java-web-app.git"
+
+  - name: gitBranch
+    label: Git Repository Branch
+    display: true
+    description: Git Repository Branch of the application's source code
+    inputType: text
+    dataType: string
+    defaultValue: "main"
+    
+  - name: ociCodeRepo
+    label: OCI Repo URI for Source Code
+    display: true
+    description: OCI Repo URI for saving Code when using Live Update
+    inputType: text
+    dataType: string
+    defaultValue: "your-registry.io/project/repo"
+
+engine:
+  merge:
+  - include: [ "**/*" ]
+    exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml" ]
+  - include: [ "tap/*.yaml", "Tiltfile" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: https://github.com/sample-accelerators/tanzu-java-web-app
+        with: "#gitUrl"
+      - text: main
+        with: "#gitBranch"
+      - text: your-registry.io/project/repo
+        with: "#ociCodeRepo"
+      - text: tanzu-java-web-app
+        with: "#artifactId"
+  - include: [ "README.md" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: tanzu-java-web-app
+        with: "#artifactId"
+  - include: [ "catalog/*.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: tanzu-java-web-app
+        with: "#artifactId"
+    - type: RewritePath
+      rewriteTo: "#filename"
