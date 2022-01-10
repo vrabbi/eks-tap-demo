@@ -38,8 +38,7 @@ accelerator:
     defaultValue: "your-registry.io/project/repo"
   - name: kubeContext
     label: Kubectl Context to develop against
-    dependsOn:
-      name: devMode
+    display: true
     description: Kubernetes Context for use when running the Live Update feature
     defaultValue: "eduk8s"
   - name: advSettings
