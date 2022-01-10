@@ -23,16 +23,6 @@ accelerator:
     inputType: text
     dataType: string
     defaultValue: "main"
-  - name: ociCodeRepo
-    label: OCI Repo URI for Source Code
-    display: true
-    description: OCI Repo URI for saving Code when using Live Update
-    defaultValue: "your-registry.io/project/repo"
-  - name: kubeContext
-    label: Kubectl Context to develop against
-    display: true
-    description: Kubernetes Context for use when running the Live Update feature
-    defaultValue: "eduk8s"
   - name: advSettings
     label: Configure Advanced Settings
     description: Fine tune settings for the workload deployment
@@ -54,6 +44,24 @@ accelerator:
         value: "test"
       - text: "Just Deploy"
         value: "none"
+  - name: devMode
+    label: Enable Inner Loop Iteration
+    display: true
+    description: Enable Inner Loop Iteration via the VSCode integration by adding Tiltfile config and VSCode workspace settings.json
+    inputType: checkbox
+    dataType: boolean
+    defaultValue: true
+  - name: ociCodeRepo
+    label: OCI Repo URI for Source Code (Optional)
+    display: true
+    description: OCI Repo URI for saving Code when using Live Update or Local Path based deployments
+    defaultValue: "your-registry.io/project/repo"
+  - name: kubeContext
+    label: Kubectl Context to develop against
+    dependsOn:
+      name: devMode
+    description: Kubernetes Context for use when running the Live Update feature
+    defaultValue: "eduk8s"
 engine:
   let:
   - name: enableScanning
