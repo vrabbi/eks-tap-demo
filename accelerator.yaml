@@ -3,7 +3,6 @@ accelerator:
   description: A sample Spring Boot web application built with Tanzu supply-chain
   iconUrl: https://github.com/sample-accelerators/icons/raw/master/icon-boot.png
   tags:
-  - java
   - spring
   - web
   - tanzu
@@ -92,7 +91,7 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
-  - include: [ "tap/*.yaml" ]
-    chain: # Chain selected yaml files to YTT
-      type: YTT
+  #- include: [ "tap/*.yaml" ]
+  #  chain: # Chain selected yaml files to YTT
+  #    type: YTT
     
