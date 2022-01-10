@@ -55,20 +55,20 @@ accelerator:
       name: advSettings
     description: Defines if the workload will skip the tekton based testing pipelines and or the Grype based source code and image scanning
     inputType: select
-    defaultValue: 2
+    defaultValue: "both"
     choices:
       - text: "Scanning and Testing"
-        value: 2
+        value: "both"
       - text: "Testing"
-        value: 1
+        value: "test"
       - text: "Just Deploy"
-        value: 0
+        value: "none"
 engine:
   let:
   - name: enableScanning
-    expression: "#securityConfig == 2 ? \"true\" : \"false\""
+    expression: "#securityConfig == \"both\" ? \"true\" : \"false\""
   - name: enableTesting
-    expression: "#securityConfig > 0 ? \"true\" : \"false\""
+    expression: "#securityConfig == \"both\" ? \"true\" : #securityConfig == \"test\" ? \"true\" : \"false\""
   merge:
   - include: [ "**/*" ]
     exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml" ]
