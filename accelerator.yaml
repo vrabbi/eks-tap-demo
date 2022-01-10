@@ -36,7 +36,6 @@ accelerator:
     label: OCI Repo URI for Source Code
     dependsOn:
       name: devMode
-      value: true
     description: OCI Repo URI for saving Code when using Live Update
     inputType: text
     dataType: string
@@ -46,7 +45,6 @@ accelerator:
     label: Kubectl Context to develop against
     dependsOn:
       name: devMode
-      value: true
     description: Kubernetes Context for use when running the Live Update feature
     inputType: text
     dataType: string
@@ -63,7 +61,6 @@ accelerator:
     label: Should unit test be run against your app
     dependsOn:
       name: advancedSettings
-      value: true
     description: If set to false then the workload will skip the tekton based testing pipelines
     inputType: select
     defaultValue: "true"
@@ -77,7 +74,6 @@ accelerator:
     label: Should source and image scans be run against your app
     dependsOn:
       name: advancedSettings
-      value: true
     description: If set to false then the workload will skip the grype based source code and image scanning
     inputType: select
     defaultValue: "true"
