@@ -9,14 +9,6 @@ accelerator:
   - tanzu
 
   options:
-  - name: title
-    label: Title
-    display: true
-    description: Title text for the application
-    inputType: text
-    dataType: string
-    defaultValue: "Tanzu Sensor Database"
-
   - name: gitUrl
     label: Git Repository URL
     display: true
@@ -33,9 +25,18 @@ accelerator:
     dataType: string
     defaultValue: "main"
     
+  - name: devMode
+    label: Configure for Inner Loop Development
+    description: Configures the needed settings for the VSCode Plugin integration
+    display: true
+    dataType: boolean
+    defaultValue: false
+
   - name: ociCodeRepo
     label: OCI Repo URI for Source Code
-    display: true
+    dependsOn:
+      name: devMode
+      value: true
     description: OCI Repo URI for saving Code when using Live Update
     inputType: text
     dataType: string
@@ -43,12 +44,49 @@ accelerator:
 
   - name: kubeContext
     label: Kubectl Context to develop against
-    display: true
+    dependsOn:
+      name: devMode
+      value: true
     description: Kubernetes Context for use when running the Live Update feature
     inputType: text
     dataType: string
     defaultValue: "eduk8s"
+    
+  - name: advancedSettings
+    label: Configure Advanced Settings
+    description: Fine tune settings for the workload deployment
+    display: true
+    dataType: boolean
+    defaultValue: false
+    
+  - name: enableTesting
+    label: Should unit test be run against your app
+    dependsOn:
+      name: advancedSettings
+      value: true
+    description: If set to false then the workload will skip the tekton based testing pipelines
+    inputType: select
+    defaultValue: "true"
+    choices:
+      - text: "True"
+        value: "true"
+      - text: "False"
+        value: "false"
 
+  - name: enableScanning
+    label: Should source and image scans be run against your app
+    dependsOn:
+      name: advancedSettings
+      value: true
+    description: If set to false then the workload will skip the grype based source code and image scanning
+    inputType: select
+    defaultValue: "true"
+    choices:
+      - text: "True"
+        value: "true"
+      - text: "False"
+        value: "false"
+        
 engine:
   merge:
   - include: [ "**/*" ]
@@ -81,3 +119,7 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
+  - include: [ "tap/*.yaml" ]
+    chain: # Chain selected yaml files to YTT
+      type: YTT
+    
