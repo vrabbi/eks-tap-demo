@@ -49,31 +49,26 @@ accelerator:
     inputType: checkbox
     dataType: boolean
     defaultValue: false
-  - name: enableTesting
-    label: Should unit test be run against your app
+  - name: securityConfig
+    label: Should unit test and scanning be run against your app
     dependsOn:
       name: advSettings
-    description: If set to false then the workload will skip the tekton based testing pipelines
+    description: Defines if the workload will skip the tekton based testing pipelines and or the Grype based source code and image scanning
     inputType: select
-    defaultValue: "true"
+    defaultValue: 2
     choices:
-      - text: "True"
-        value: "true"
-      - text: "False"
-        value: "false"
-  - name: enableScanning
-    label: Should source and image scans be run against your app
-    dependsOn:
-      name: advSettings
-    description: If set to false then the workload will skip the grype based source code and image scanning
-    inputType: select
-    defaultValue: "true"
-    choices:
-      - text: "True"
-        value: "true"
-      - text: "False"
-        value: "false"
+      - text: "Scanning and Testing"
+        value: 2
+      - text: "Testing"
+        value: 1
+      - text: "Just Deploy"
+        value: 0
 engine:
+  let:
+  - name: enableScanning
+    expression: "#securityConfig == 2 ? \"true\" : \"false\""
+  - name: enableTesting
+    expression: "#securityConfig > 0 ? \"true\" : \"false\""
   merge:
   - include: [ "**/*" ]
     exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml" ]
