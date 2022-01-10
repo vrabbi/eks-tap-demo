@@ -16,7 +16,6 @@ accelerator:
     inputType: text
     dataType: string
     defaultValue: "https://github.com/sample-accelerators/tanzu-java-web-app.git"
-
   - name: gitBranch
     label: Git Repository Branch
     display: true
@@ -24,35 +23,30 @@ accelerator:
     inputType: text
     dataType: string
     defaultValue: "main"
-    
   - name: devMode
     label: Configure for Inner Loop Development
     description: Configures the needed settings for the VSCode Plugin integration
     display: true
     dataType: boolean
     defaultValue: false
-
   - name: ociCodeRepo
     label: OCI Repo URI for Source Code
     dependsOn:
       name: devMode
     description: OCI Repo URI for saving Code when using Live Update
     defaultValue: "your-registry.io/project/repo"
-
   - name: kubeContext
     label: Kubectl Context to develop against
     dependsOn:
       name: devMode
     description: Kubernetes Context for use when running the Live Update feature
     defaultValue: "eduk8s"
-    
   - name: advancedSettings
     label: Configure Advanced Settings
     description: Fine tune settings for the workload deployment
     display: true
     dataType: boolean
     defaultValue: false
-    
   - name: enableTesting
     label: Should unit test be run against your app
     dependsOn:
@@ -65,7 +59,6 @@ accelerator:
         value: "true"
       - text: "False"
         value: "false"
-
   - name: enableScanning
     label: Should source and image scans be run against your app
     dependsOn:
@@ -78,7 +71,6 @@ accelerator:
         value: "true"
       - text: "False"
         value: "false"
-        
 engine:
   merge:
   - include: [ "**/*" ]
