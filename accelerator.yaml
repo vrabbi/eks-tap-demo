@@ -1,5 +1,5 @@
 accelerator:
-  displayName: Java Web App
+  displayName: Demo Web App
   description: A sample Spring Boot web application built with Tanzu supply-chain
   iconUrl: https://github.com/sample-accelerators/icons/raw/master/icon-boot.png
   tags:
