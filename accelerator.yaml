@@ -7,7 +7,6 @@ accelerator:
   - spring
   - web
   - tanzu
-  - accelerator
 
   options:
   - name: gitUrl
