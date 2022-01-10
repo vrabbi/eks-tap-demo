@@ -29,6 +29,7 @@ accelerator:
     description: Configures the needed settings for the VSCode Plugin integration
     display: true
     dataType: boolean
+    inputType: checkbox
     defaultValue: false
   - name: ociCodeRepo
     label: OCI Repo URI for Source Code
@@ -42,16 +43,17 @@ accelerator:
       name: devMode
     description: Kubernetes Context for use when running the Live Update feature
     defaultValue: "eduk8s"
-  - name: advancedSettings
+  - name: advSettings
     label: Configure Advanced Settings
     description: Fine tune settings for the workload deployment
     display: true
+    inputType: checkbox
     dataType: boolean
     defaultValue: false
   - name: enableTesting
     label: Should unit test be run against your app
     dependsOn:
-      name: advancedSettings
+      name: advSettings
     description: If set to false then the workload will skip the tekton based testing pipelines
     inputType: select
     defaultValue: "true"
@@ -63,7 +65,7 @@ accelerator:
   - name: enableScanning
     label: Should source and image scans be run against your app
     dependsOn:
-      name: advancedSettings
+      name: advSettings
     description: If set to false then the workload will skip the grype based source code and image scanning
     inputType: select
     defaultValue: "true"
