@@ -1,0 +1,4 @@
+#@data/values
+---
+enableScanning: "true"
+enableTesting: "true"
