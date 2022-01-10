@@ -70,7 +70,7 @@ engine:
     expression: "#securityConfig == \"both\" ? \"true\" : #securityConfig == \"test\" ? \"true\" : \"false\""
   merge:
   - include: [ "**/*" ]
-    exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".vscode/" ]
+    exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".vscode/*" ]
   - include: [ "tap/workload.yaml"]
     chain:
     - type: ReplaceText
