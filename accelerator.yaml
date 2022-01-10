@@ -63,7 +63,7 @@ engine:
   merge:
   - include: [ "**/*" ]
     exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml" ]
-  - include: [ "tap/*.yaml", "Tiltfile" ]
+  - include: [ "tap/workload.yaml", "Tiltfile" ]
     chain:
     - type: ReplaceText
       substitutions:
@@ -94,5 +94,5 @@ engine:
   - include: [ "tap/*.yaml" ]
     chain: # Chain selected yaml files to YTT
     - type: YTT
-  - exclude: [ "tap/values.yaml" ]
+    exclude: [ "tap/values.yaml" ]
     
