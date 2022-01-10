@@ -70,7 +70,7 @@ engine:
     expression: "#securityConfig == \"both\" ? \"true\" : #securityConfig == \"test\" ? \"true\" : \"false\""
   merge:
   - include: [ "**/*" ]
-    exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml" ]
+    exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".vscode/" ]
   - include: [ "tap/workload.yaml"]
     chain:
     - type: ReplaceText
@@ -82,7 +82,7 @@ engine:
       - text: tanzu-java-web-app
         with: "#artifactId"
   - condition: "#devMode"
-    include: [ "Tiltfile" ]
+    include: [ "Tiltfile", ".vscode/*" ]
     chain:
     - type: ReplaceText
       substitutions:
