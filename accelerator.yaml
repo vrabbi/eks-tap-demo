@@ -24,17 +24,9 @@ accelerator:
     inputType: text
     dataType: string
     defaultValue: "main"
-  - name: devMode
-    label: Configure for Inner Loop Development
-    description: Configures the needed settings for the VSCode Plugin integration
-    display: true
-    dataType: boolean
-    inputType: checkbox
-    defaultValue: false
   - name: ociCodeRepo
     label: OCI Repo URI for Source Code
-    dependsOn:
-      name: devMode
+    display: true
     description: OCI Repo URI for saving Code when using Live Update
     defaultValue: "your-registry.io/project/repo"
   - name: kubeContext
