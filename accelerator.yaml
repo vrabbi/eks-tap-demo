@@ -91,7 +91,7 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
-  #- include: [ "tap/*.yaml" ]
-  #  chain: # Chain selected yaml files to YTT
-  #    type: YTT
+  - include: [ "tap/*.yaml" ]
+    chain: # Chain selected yaml files to YTT
+    - type: YTT
     
