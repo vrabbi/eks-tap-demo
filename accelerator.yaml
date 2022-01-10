@@ -37,8 +37,6 @@ accelerator:
     dependsOn:
       name: devMode
     description: OCI Repo URI for saving Code when using Live Update
-    inputType: text
-    dataType: string
     defaultValue: "your-registry.io/project/repo"
 
   - name: kubeContext
@@ -46,8 +44,6 @@ accelerator:
     dependsOn:
       name: devMode
     description: Kubernetes Context for use when running the Live Update feature
-    inputType: text
-    dataType: string
     defaultValue: "eduk8s"
     
   - name: advancedSettings
