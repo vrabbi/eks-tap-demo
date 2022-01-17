@@ -1,14 +1,18 @@
 #@ load("@ytt:data", "data")
 
+#@ def labels():
+apps.tanzu.vmware.com/workload-type: web
+#@ if/end data.values.enableTesting == false:
+test: "false"
+#@ if/end data.values.enableScanning == false:
+scan: "false"
+#@ end
+
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   name: #@ data.values.artifactId
-  labels:
-    apps.tanzu.vmware.com/workload-type: web
-    app.kubernetes.io/part-of: #@ data.values.artifactId
-    test: #@ data.values.enableTesting
-    scan: #@ data.values.enableScanning
+  labels: #@ labels()
 spec:
   source:
     git:
