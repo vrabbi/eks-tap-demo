@@ -71,18 +71,6 @@ engine:
   merge:
   - include: [ "**/*" ]
     exclude: [ "tap/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".vscode/*" ]
-  - include: [ "tap/workload.yaml" ]
-    chain:
-    - type: ReplaceText
-      substitutions:
-      - text: https://github.com/sample-accelerators/tanzu-java-web-app.git
-        with: "#gitUrl"
-      - text: main
-        with: "#gitBranch"
-      - text: your-registry.io/project/repo
-        with: "#ociCodeRepo"
-      - text: tanzu-java-web-app
-        with: "#artifactId"
   - condition: "#devMode"
     include: [ "Tiltfile", ".vscode/*" ]
     chain:
@@ -108,8 +96,8 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
-#  - include: [ "tap/*.yaml" ]
-#    chain: # Chain selected yaml files to YTT
-#    - type: YTT
-#    exclude: [ "tap/values.yaml" ]
+  - include: [ "tap/*.yaml" ]
+    chain: # Chain selected yaml files to YTT
+    - type: YTT
+    exclude: [ "tap/values.yaml" ]
     
