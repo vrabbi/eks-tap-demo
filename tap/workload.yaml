@@ -2,9 +2,9 @@
 
 #@ def labels():
 apps.tanzu.vmware.com/workload-type: web
-#@ if/end data.values.enableTesting == False:
+#@ if/end data.values.enableTesting == "false":
 test: "false"
-#@ if/end data.values.enableScanning == False:
+#@ if/end data.values.enableScanning == "false":
 scan: "false"
 #@ end
 
